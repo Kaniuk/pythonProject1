@@ -91,9 +91,72 @@ if __name__ == "__main__":
     book3 = Book([author, author2], "The Hobbit", 1937, fantasy, )
     book4 = Book([author2, author], "The Hobbit", 1937, fantasy, )
 
-    print(book3 == book4)  # book3.__eq__(book4)
-    print(book3 == book2)
-    print(book3 != book4)  # book3.__nq__(book4)
-    print(book3 != book2)
+    # print(book3 == book4)  # book3.__eq__(book4)
+    # print(book3 == book2)
+    # print(book3 != book4)  # book3.__nq__(book4)
+    # print(book3 != book2)
     print(book)
     print(book2)
+
+
+#
+# Створіть клас, який описує автомобіль. Створіть клас автосалону, що містить в собі список автомобілів,
+#
+# доступних для продажу, і функцію продажу заданого автомобіля.
+
+class Car:
+    def __init__(self, id: int, model: str, year, max_speed, color: str):
+        self.id = id
+        self.model = model
+        self.year = year
+        self.max_speed = max_speed
+        self.color = color
+
+    def __repr__(self):
+        return f"Car({self.id}, {self.model}, {self.year}, {self.max_speed}, {self.color})"
+
+    def __str__(self):
+        return f"Car ID: {self.id}, Model: {self.model}, Year: {self.year}, Max Speed: {self.max_speed} km/h, Color: {self.color}"
+
+
+class CarDealership:
+    def __init__(self, cars: list[Car]):
+        self.cars = cars
+
+    def sale_car(self, car_id):
+        for car in self.cars:
+            if car.id == car_id:
+                self.cars.remove(car)
+                return car
+        return None
+
+    def add_car(self, new_car):
+        if new_car.id < 0:
+            raise ValueError('Id field must be greater 0')
+        for car in self.cars:
+            if car.id == new_car.id:
+                raise ValueError('Id already exist!')
+        self.cars.append(new_car)
+
+    def __repr__(self):
+        return f"CarDealership({self.cars})"
+
+    def __str__(self):
+        return "\n".join(
+            str(car) for car in self.cars)
+
+
+car1 = Car(1, 'BMW', 2006, 150, 'black')
+car2 = Car(2, 'Lanos', 2000, 120, 'white')
+car3 = Car(3, 'Zaporoszes', 1956, 100, 'green')
+car4 = Car(4, 'Ford', 2005, 150, 'blue')
+car5 = Car(5, 'Mercedes', 2020, 200, 'red')
+
+car_list = CarDealership([car1, car2, car3, car4, car5])
+new_car = Car(6, 'DDD', 1996, 120, 'blue')
+car_list.add_car(new_car)
+print(car_list)
+sold_car = car_list.sale_car(2)
+print('+++++++++++++++++++++++++++++++++++++++++++')
+print(car_list)
+print(sold_car)
