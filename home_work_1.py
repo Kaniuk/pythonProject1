@@ -99,13 +99,11 @@ if __name__ == "__main__":
     print(book2)
 
 
-#
 # Створіть клас, який описує автомобіль. Створіть клас автосалону, що містить в собі список автомобілів,
-#
 # доступних для продажу, і функцію продажу заданого автомобіля.
 
 class Car:
-    def __init__(self, id: int, model: str, year, max_speed, color: str):
+    def __init__(self, id: int, model: str, year: int, max_speed: int, color: str):
         self.id = id
         self.model = model
         self.year = year
@@ -153,10 +151,13 @@ car4 = Car(4, 'Ford', 2005, 150, 'blue')
 car5 = Car(5, 'Mercedes', 2020, 200, 'red')
 
 car_list = CarDealership([car1, car2, car3, car4, car5])
+
 new_car = Car(6, 'DDD', 1996, 120, 'blue')
 car_list.add_car(new_car)
+
 print(car_list)
+
 sold_car = car_list.sale_car(2)
-print('+++++++++++++++++++++++++++++++++++++++++++')
-print(car_list)
 print(sold_car)
+
+print(car_list)
